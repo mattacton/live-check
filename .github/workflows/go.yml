@@ -31,10 +31,12 @@ jobs:
         fi
 
     - name: Build
-      run: go build -v .
+      run: |
+        mkdir bin
+        go build -v -o bin/livecheck .
       
     - name: Artifact
       uses: actions/upload-artifact@v1
       with:
         name: livecheck
-        path: .
+        path: bin/livecheck
