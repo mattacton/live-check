@@ -1,0 +1,19 @@
+[Unit]
+Description=A simple http server for liveness health checks
+ConditionPathExists=/opt/livecheck/bin/livecheck
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+StartLimitIntervalSec=60
+
+ExecStart=/opt/livecheck/bin/livecheck
+
+[Install]
+WantedBy=multi-user.target
